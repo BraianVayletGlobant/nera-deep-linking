@@ -4,50 +4,49 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [isAppInstalled, setIsAppInstalled] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({});
 
-  useEffect(() => {
-    const isMobile = /Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+  useEffect(async () => {
+    try {
+      // check if the browser is running in a mobile device
+      const isAndroid = /Android/.test(navigator.userAgent);
+      setMessage({ isAndroid, ...message });
+      const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
+      setMessage({ isIos, ...message });
 
-    if (isMobile) {
       const customScheme = "appnera://";
-      const appInstalled = new Promise((resolve, reject) => {
-        const iframe = document.createElement("iframe");
-        iframe.style.display = "none";
-        iframe.src = customScheme;
-        document.body.appendChild(iframe);
 
-        setTimeout(() => {
-          document.body.removeChild(iframe);
-          resolve(true);
-        }, 100);
+      // check if the app is installed in the device
+      const appInstalled = await fetch(`${customScheme}://`).then(
+        (response) => response.ok,
+        () => false
+      );
+      setMessage({ appInstalled, ...message });
 
-        setTimeout(() => {
-          document.body.removeChild(iframe);
-          reject(false);
-        }, 200);
-      });
+      // if the app is installed, open it
+      if (appInstalled) {
+        setMessage({ message: "La aplicación está instalada", ...message });
+        window.location.href = customScheme;
+      }
 
-      console.log("appInstalled", appInstalled);
-      setIsAppInstalled(appInstalled);
+      // if the app is not installed, redirect to the app store
+      if (!appInstalled) {
+        setMessage({ message: "La aplicación no está instalada", ...message });
+        if (isAndroid) {
+          window.location.href =
+            "https://play.google.com/store/apps/details?id=com.nera.neraagro";
+        } else if (isIos) {
+          window.location.href =
+            "https://apps.apple.com/us/app/nera/id1667637863";
+        }
+      }
 
-      appInstalled
-        .then(() => {
-          setMessage("La aplicación está instalada");
-          window.location.href = customScheme;
-        })
-        .catch(() => {
-          setMessage("La aplicación no está instalada");
-          const isAndroid = /Android/.test(navigator.userAgent);
-          if (isAndroid) {
-            window.location.href =
-              "https://play.google.com/store/apps/details?id=com.nera.neraagro";
-          } else {
-            window.location.href =
-              "https://apps.apple.com/us/app/nera/id1667637863";
-          }
-        });
+      // if the browser is not running in a mobile device, redirect to the web app
+      if (!isAndroid && !isIos) {
+        return;
+      }
+    } catch (error) {
+      setMesage({ error, ...message });
     }
   }, []);
 
@@ -64,7 +63,7 @@ function App() {
       <h1>NERA DEEP LINKING v3</h1>
       <div className="card">
         <a href="appnera://test1" target="_blank">
-          NERA APP TEST 3
+          NERA APP TEST 4
         </a>
         <br />
         <a href="appnera://" target="_blank">
@@ -72,8 +71,7 @@ function App() {
         </a>
 
         <br />
-        <p>isAppInstalled: {isAppInstalled}</p>
-        <p>message: {message}</p>
+        <p>message: {JSON.stringify(message)}</p>
       </div>
     </>
   );
