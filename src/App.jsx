@@ -3,15 +3,23 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-const useAppDeepLinking = (customScheme, androidLink, iosLink) => {
-  useEffect(async () => {
-    // Verificamos si la página web se está abriendo desde un dispositivo móvil
-    const isOtherMobile = /BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-    const isAndroid = /Android/i.test(navigator.userAgent);
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const useAppDeepLinking = ({ customScheme, androidLink, iosLink }) => {
+  // Verificamos si la página web se está abriendo desde un dispositivo móvil
+  const isOtherMobile = /BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+  if (isAndroid) {
+    alert("El dispositivo móvil es Android");
+  }
+
+  if (isIOS) {
+    alert("El dispositivo móvil es iOS");
+  }
+
+  useEffect(async () => {
     if (isOtherMobile || isAndroid || isIOS) {
       // Verificamos si la aplicación está instalada en el dispositivo
       const appInstalled = await fetch(`${customScheme}://`).then(
@@ -48,7 +56,7 @@ function App() {
     "https://play.google.com/store/apps/details?id=com.nera.neraagro&hl=en_US";
   const appStore = "https://apps.apple.com/us/app/nera/id1667637863";
 
-  useAppDeepLinking(customScheme, playStore, appStore);
+  useAppDeepLinking({ customScheme, playStore, appStore });
 
   return (
     <>
