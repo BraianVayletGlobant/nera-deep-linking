@@ -25,7 +25,7 @@ function App() {
         setTimeout(function () {
           window.location.href = isAndroid
             ? "https://play.google.com/store/apps/details?id=com.nera.neraagro"
-            : "https://apps.apple.com/us/app/nera/id1667637863";
+            : "https://apps.apple.com/app/nera/id1667637863";
         }, 1000);
       }
     } catch (error) {
