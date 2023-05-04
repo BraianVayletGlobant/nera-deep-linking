@@ -52,7 +52,14 @@ function App() {
         <a href="appnera://" target="_blank">
           NERA APP
         </a>
-
+        <button
+          onClick={() =>
+            (window.location.href =
+              "https://apps.apple.com/app/nera/id1667637863")
+          }
+        >
+          APPSTORE
+        </button>
         <br />
         <p>message: {JSON.stringify(message)}</p>
       </div>
