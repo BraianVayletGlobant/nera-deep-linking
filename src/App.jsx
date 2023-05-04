@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      // El usuario está en un dispositivo móvil, se dirige a la aplicación utilizando el enlace "mi-app://"
+      window.location.href = "appnera://";
+    } else {
+      // El usuario está en un ordenador, se mantiene en la página web "https://www.mipagina.com"
+      alert("No es un dispositivo móvil");
+    }
+  }, []);
+
   return (
     <>
       <div>
