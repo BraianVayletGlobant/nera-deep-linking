@@ -37,7 +37,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>NERA DEEP LINKING v3</h1>
+      <h1>NERA DEEP LINKING v4</h1>
       <div className="card">
         <a href="appnera://test1" target="_blank">
           NERA APP TEST 4
