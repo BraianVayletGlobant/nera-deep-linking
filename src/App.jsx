@@ -3,18 +3,16 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
-function App() {
+const useAppDeepLinking = (customScheme, androidLink, iosLink) => {
   useEffect(async () => {
-    // Definimos el esquema de URL personalizado que se utiliza en la aplicación móvil
-    const customScheme = "appnera";
-
     // Verificamos si la página web se está abriendo desde un dispositivo móvil
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
+    const isOtherMobile = /BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (isMobile) {
+    if (isOtherMobile || isAndroid || isIOS) {
       // Verificamos si la aplicación está instalada en el dispositivo
       const appInstalled = await fetch(`${customScheme}://`).then(
         (response) => response.ok,
@@ -23,19 +21,34 @@ function App() {
 
       if (appInstalled) {
         // Si la aplicación está instalada, abrimos el enlace personalizado en la aplicación móvil
-        alert("La app está instalada");
+        alert("La aplicación está instalada");
         window.location.href = `${customScheme}://`;
       } else {
         // Si la aplicación no está instalada, redirigimos al usuario a la tienda de aplicaciones
-        alert("La app no está instalada");
-        window.location.href = "https://play.google.com/";
+        alert("La aplicación no está instalada");
+        if (isAndroid) {
+          window.location.href = androidLink;
+        }
+        if (isIOS) {
+          window.location.href = iosLink;
+        }
+        if (isOtherMobile) {
+          // Si el dispositivo móvil no es Android ni iOS, no hacemos nada
+          alert("El dispositivo móvil no es Android ni iOS");
+          console.log("El dispositivo móvil no es Android ni iOS");
+        }
       }
-    } else {
-      // Si la página web se está abriendo desde un ordenador, no hacemos nada
-      alert("La página web se está abriendo desde un ordenador");
-      console.log("La página web se está abriendo desde un ordenador");
     }
-  }, []);
+  }, [customScheme, androidLink, iosLink]);
+};
+
+function App() {
+  const customScheme = "appnera";
+  const playStore =
+    "https://play.google.com/store/apps/details?id=com.nera.neraagro&hl=en_US";
+  const appStore = "https://apps.apple.com/us/app/nera/id1667637863";
+
+  useAppDeepLinking(customScheme, playStore, appStore);
 
   return (
     <>
@@ -52,6 +65,8 @@ function App() {
         <a href="appnera://test1" target="_blank">
           NERA APP TEST 1
         </a>
+        <br />
+        <br />
         <a href="appnera://" target="_blank">
           NERA APP
         </a>
