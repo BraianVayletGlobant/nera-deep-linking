@@ -14,14 +14,20 @@ function App() {
       const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
       setMessage({ isIos, ...message });
 
-      const customScheme = "appnera";
+      // check if the browser is running in a mobile device
+      const isMobile = isAndroid || isIos;
+      setMessage({ isMobile, ...message });
 
-      window.location.href = `${customScheme}://`;
-      setTimeout(function () {
-        window.location.href = isAndroid
-          ? "https://play.google.com/store/apps/details?id=com.nera.neraagro"
-          : "https://apps.apple.com/us/app/nera/id1667637863";
-      }, 1000);
+      if (isMobile) {
+        const customScheme = "appnera";
+
+        window.location.href = `${customScheme}://`;
+        setTimeout(function () {
+          window.location.href = isAndroid
+            ? "https://play.google.com/store/apps/details?id=com.nera.neraagro"
+            : "https://apps.apple.com/us/app/nera/id1667637863";
+        }, 1000);
+      }
     } catch (error) {
       setMesage({ error, ...message });
     }
