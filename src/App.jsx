@@ -14,6 +14,7 @@ function App() {
     );
     const isAndroid = /Android/i.test(navigator.userAgent);
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    alert("is", navigator.userAgent, isAndroid, isIOS, isOtherMobile);
 
     if (isAndroid) {
       alert("El dispositivo móvil es Android");
@@ -29,6 +30,7 @@ function App() {
         (response) => response.ok,
         () => false
       );
+      alert("appInstalled", appInstalled);
 
       if (appInstalled) {
         // Si la aplicación está instalada, abrimos el enlace personalizado en la aplicación móvil
@@ -68,7 +70,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React 1</h1>
+      <h1>NERA DEEP LINKING v1</h1>
       <div className="card">
         <a href="appnera://test1" target="_blank">
           NERA APP TEST 3
