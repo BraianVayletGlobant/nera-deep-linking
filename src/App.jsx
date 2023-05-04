@@ -22,37 +22,6 @@ function App() {
           ? "https://play.google.com/store/apps/details?id=com.nera.neraagro"
           : "https://apps.apple.com/us/app/nera/id1667637863";
       }, 1000);
-
-      // // op2
-      // // check if the app is installed in the device
-      // const appInstalled = await fetch(`${customScheme}://`).then(
-      //   (response) => response.ok,
-      //   () => false
-      // );
-      // setMessage({ appInstalled, ...message });
-
-      // // if the app is installed, open it
-      // if (appInstalled) {
-      //   setMessage({ message: "La aplicación está instalada", ...message });
-      //   window.location.href = customScheme;
-      // }
-
-      // // if the app is not installed, redirect to the app store
-      // if (!appInstalled) {
-      //   setMessage({ message: "La aplicación no está instalada", ...message });
-      //   if (isAndroid) {
-      //     window.location.href =
-      //       "https://play.google.com/store/apps/details?id=com.nera.neraagro";
-      //   } else if (isIos) {
-      //     window.location.href =
-      //       "https://apps.apple.com/us/app/nera/id1667637863";
-      //   }
-      // }
-
-      // // if the browser is not running in a mobile device, redirect to the web app
-      // if (!isAndroid && !isIos) {
-      //   return;
-      // }
     } catch (error) {
       setMesage({ error, ...message });
     }
