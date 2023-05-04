@@ -14,7 +14,7 @@ function App() {
       const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
       setMessage({ isIos, ...message });
 
-      const customScheme = "appnera://";
+      const customScheme = "appnera";
 
       // check if the app is installed in the device
       const appInstalled = await fetch(`${customScheme}://`).then(
