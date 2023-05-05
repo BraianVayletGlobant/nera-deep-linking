@@ -6,26 +6,26 @@ import "./App.css";
 function App() {
   const [message, setMessage] = useState({});
 
-  useEffect(async () => {
-    try {
-      const customScheme = "appnera";
-      const playStoreUrl =
-        "https://play.google.com/store/apps/details?id=com.nera.neraagro";
-      const appStoreUrl = "https://apps.apple.com/app/nera/id1667637863";
-      // check if the browser is running in a mobile device
-      const isAndroid = /Android/.test(navigator.userAgent);
-      const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  // useEffect(async () => {
+  //   try {
+  //     const customScheme = "appnera";
+  //     const playStoreUrl =
+  //       "https://play.google.com/store/apps/details?id=com.nera.neraagro";
+  //     const appStoreUrl = "https://apps.apple.com/app/nera/id1667637863";
+  //     // check if the browser is running in a mobile device
+  //     const isAndroid = /Android/.test(navigator.userAgent);
+  //     const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
-      if (isAndroid || isIos) {
-        window.location.href = `${customScheme}://`;
-        setTimeout(function () {
-          window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
-        }, 1000);
-      }
-    } catch (error) {
-      console.error("error", error);
-    }
-  }, []);
+  //     if (isAndroid || isIos) {
+  //       window.location.href = `${customScheme}://`;
+  //       setTimeout(function () {
+  //         window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
+  //       }, 1000);
+  //     }
+  //   } catch (error) {
+  //     console.error("error", error);
+  //   }
+  // }, []);
 
   return (
     <>
