@@ -8,28 +8,22 @@ function App() {
 
   useEffect(async () => {
     try {
+      const customScheme = "appnera";
+      const playStoreUrl =
+        "https://play.google.com/store/apps/details?id=com.nera.neraagro";
+      const appStoreUrl = "https://apps.apple.com/app/nera/id1667637863";
       // check if the browser is running in a mobile device
       const isAndroid = /Android/.test(navigator.userAgent);
-      setMessage({ isAndroid, ...message });
       const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
-      setMessage({ isIos, ...message });
 
-      // check if the browser is running in a mobile device
-      const isMobile = isAndroid || isIos;
-      setMessage({ isMobile, ...message });
-
-      if (isMobile) {
-        const customScheme = "appnera";
-
+      if (isAndroid || isIos) {
         window.location.href = `${customScheme}://`;
         setTimeout(function () {
-          window.location.href = isAndroid
-            ? "https://play.google.com/store/apps/details?id=com.nera.neraagro"
-            : "https://apps.apple.com/app/nera/id1667637863";
+          window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
         }, 1000);
       }
     } catch (error) {
-      setMesage({ error, ...message });
+      console.error("error", error);
     }
   }, []);
 
@@ -43,7 +37,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>NERA DEEP LINKING v4</h1>
+      <h1>NERA DEEP LINKING v5</h1>
       <div className="card">
         <a href="appnera://test1" target="_blank">
           NERA APP TEST 4
