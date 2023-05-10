@@ -4,7 +4,10 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState({});
+  // check if the browser is running in a mobile device
+  const isAndroid = /Android/.test(navigator.userAgent);
+  const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  const isMobile = isAndroid || isIos;
 
   useEffect(async () => {
     try {
@@ -12,20 +15,26 @@ function App() {
       const playStoreUrl =
         "https://play.google.com/store/apps/details?id=com.nera.neraagro";
       const appStoreUrl = "https://apps.apple.com/app/nera/id1667637863";
-      // check if the browser is running in a mobile device
-      const isAndroid = /Android/.test(navigator.userAgent);
-      const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
 
-      if (isAndroid || isIos) {
-        window.location.href = `${customScheme}://`;
-        setTimeout(function () {
-          window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
-        }, 1000);
+      console.log("isMobile", isMobile);
+      console.log("isAndroid", isAndroid);
+      console.log("isIos", isIos);
+      if (isMobile) {
+        if (confirm("Do you want to open the app?") === true) {
+          console.log("true", true);
+          window.location.href = `${customScheme}://`;
+          setTimeout(function () {
+            window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
+          }, 1000);
+        } else {
+          console.log("false", false);
+          return;
+        }
       }
     } catch (error) {
       console.error("error", error);
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
@@ -55,7 +64,6 @@ function App() {
           APPSTORE
         </button>
         <br />
-        <p>message: {JSON.stringify(message)}</p>
       </div>
     </>
   );
