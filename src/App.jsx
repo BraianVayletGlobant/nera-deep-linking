@@ -1,40 +1,10 @@
-import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import useRedirectToApp from "./useRedirectToApp";
 
 function App() {
-  // check if the browser is running in a mobile device
-  const isAndroid = /Android/.test(navigator.userAgent);
-  const isIos = /iPhone|iPad|iPod/.test(navigator.userAgent);
-  const isMobile = isAndroid || isIos;
-
-  useEffect(async () => {
-    try {
-      const customScheme = "appnera";
-      const playStoreUrl =
-        "https://play.google.com/store/apps/details?id=com.nera.neraagro";
-      const appStoreUrl = "https://apps.apple.com/app/nera/id1667637863";
-
-      console.log("isMobile", isMobile);
-      console.log("isAndroid", isAndroid);
-      console.log("isIos", isIos);
-      if (isMobile) {
-        if (confirm("Do you want to open the app?") === true) {
-          console.log("true", true);
-          window.location.href = `${customScheme}://`;
-          setTimeout(function () {
-            window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
-          }, 1000);
-        } else {
-          console.log("false", false);
-          return;
-        }
-      }
-    } catch (error) {
-      console.error("error", error);
-    }
-  }, [isMobile]);
+  useRedirectToApp();
 
   return (
     <>
