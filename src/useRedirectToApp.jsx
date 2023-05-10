@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const isAndroid = /Android/.test(navigator.userAgent);
 const isMobile = /Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 const customScheme = "appnera";
