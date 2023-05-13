@@ -12,18 +12,22 @@ const handleAppScheme = (scheme) => {
   setTimeout(function () {
     window.location.href = isAndroid ? playStoreUrl : appStoreUrl;
   }, 1000);
-}
+};
 
-const useRedirectToApp = ({appScheme = customScheme, ask = true})  => {  
+const useRedirectToApp = ({ appScheme = customScheme, ask = true }) => {
   useEffect(() => {
     const redirectToApp = async () => {
       try {
-        if (isMobile && ask && window.confirm("Quieres usar la app de Nera?") === true) {            
+        if (
+          isMobile &&
+          ask &&
+          window.confirm("Quieres usar la app de Nera?") === true
+        ) {
           handleAppScheme(appScheme);
         }
-        if ( isMobile && !ask) {
+        if (isMobile && !ask) {
           handleAppScheme(appScheme);
-        }                   
+        }
       } catch (error) {
         console.error("error", error);
       }
@@ -34,5 +38,3 @@ const useRedirectToApp = ({appScheme = customScheme, ask = true})  => {
 };
 
 export default useRedirectToApp;
-
-"agtech-lib": "git+https://github.com/AgTechHub/agtech-lib.git#main",
