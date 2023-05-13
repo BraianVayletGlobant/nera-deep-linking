@@ -4,7 +4,7 @@ import "./App.css";
 import useRedirectToApp from "./useRedirectToApp";
 
 function App() {
-  useRedirectToApp();
+  useRedirectToApp({ appScheme: "appnera", ask: true });
 
   return (
     <>
