@@ -6,6 +6,20 @@ import useRedirectToApp from "./useRedirectToApp";
 function App() {
   useRedirectToApp({ appScheme: "appnera", ask: true });
 
+  const onClickShare = () => {
+    if (navigator.share) {
+      // La función navigator.share está disponible en navegadores compatibles
+      navigator.share({
+        title: "Compartir enlace",
+        text: "¡Echa un vistazo a este enlace!",
+        url: "https://ejemplo.com",
+      });
+    } else {
+      // Envía un mensaje al WebView indicando que se debe compartir
+      window.postMessage("compartir");
+    }
+  };
+
   return (
     <>
       <div>
@@ -25,14 +39,7 @@ function App() {
         <a href="appnera://" target="_blank">
           NERA APP
         </a>
-        <button
-          onClick={() =>
-            (window.location.href =
-              "https://apps.apple.com/app/nera/id1667637863")
-          }
-        >
-          APPSTORE
-        </button>
+        <button onClick={onClickShare}>SHARE</button>
         <br />
       </div>
     </>
