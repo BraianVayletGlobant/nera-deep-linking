@@ -7,7 +7,10 @@ function App() {
   useRedirectToApp({ appScheme: "appnera", ask: true });
 
   const onClickShare = () => {
+    console.log("navigator.share", navigator.share);
+    console.log("window.navigator.share", window.navigator.share);
     if (navigator.share) {
+      console.log("true", true);
       // La función navigator.share está disponible en navegadores compatibles
       navigator.share({
         title: "Compartir enlace",
@@ -15,6 +18,7 @@ function App() {
         url: "https://ejemplo.com",
       });
     } else {
+      console.log("false", false);
       // Envía un mensaje al WebView indicando que se debe compartir
       window.postMessage("compartir");
     }
