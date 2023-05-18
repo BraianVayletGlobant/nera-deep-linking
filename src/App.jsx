@@ -20,7 +20,7 @@ function App() {
     } else {
       console.log("false", false);
       // Envía un mensaje al WebView indicando que se debe compartir
-      window.postMessage("compartir");
+      window.postMessage("nera-share");
     }
   };
 
