@@ -8,19 +8,13 @@ function App() {
   const token2 = sessionStorage.getItem("appNeraAuthToken");
 
   useEffect(() => {
-    const token1 = sessionStorage.getItem("appNeraAuthToken");
-    setToken(token1);
-    console.log("token::[]", token1);
-    alert("token::[]", token1);
-    alert(token1);
-  }, []);
+    setToken(token2);
+  }, [token2]);
 
   useEffect(() => {
-    setToken(token2);
-    console.log("token::[]", token2);
-    alert("token::[]", token2);
-    alert(token2);
-  }, [token2]);
+    const data = { message: "Hola desde la página web" };
+    window.ReactNativeWebView.postMessage(JSON.stringify(data));
+  }, []);
 
   // useRedirectToApp({ appScheme: "appnera", ask: true });
 
@@ -40,6 +34,15 @@ function App() {
         <a href="appnera://" target="_blank">
           NERA APP
         </a>
+        <br />
+        <button
+          onClick={() => {
+            const data = { message: "close-webview" };
+            window.ReactNativeWebView.postMessage(JSON.stringify(data));
+          }}
+        >
+          Cerrar WebView
+        </button>
         <br />
         <p>token: {token}</p>
       </div>
