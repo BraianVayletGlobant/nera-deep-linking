@@ -49,7 +49,7 @@ function App() {
         <br />
         <button onClick={() => sendDataNeraWenView()}>Cerrar WebView</button>
         <br />
-        <p>token: {token}</p>
+        {/* <p>token: {token}</p> */}
       </div>
     </>
   );
