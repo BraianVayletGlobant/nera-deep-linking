@@ -32,11 +32,13 @@ const HtmlToPdfComponent = ({ htmlContent }) => {
   useEffect(() => {
     const token1 = sessionStorage.getItem("appNeraAuthToken");
     console.log("token::[]", token1);
+    alert("token::[]", token1);
   }, []);
 
   const token2 = sessionStorage.getItem("appNeraAuthToken");
   useEffect(() => {
     console.log("token::[]", token2);
+    alert("token::[token2]", token2);
   }, [token2]);
 
   return (
