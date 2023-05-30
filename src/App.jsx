@@ -12,7 +12,7 @@ function App() {
   }, [token2]);
 
   useEffect(() => {
-    const data = { message: "Hola desde la página web" };
+    const data = { message: "Hola desde la página web", entity: "web" };
     window.ReactNativeWebView.postMessage(JSON.stringify(data));
   }, []);
 
