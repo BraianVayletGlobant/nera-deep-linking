@@ -18,6 +18,17 @@ function App() {
 
   // useRedirectToApp({ appScheme: "appnera", ask: true });
 
+  const sendDataNeraWenView = () => {
+    const data = {
+      action: "webview-action",
+      payload: {
+        entity: "galicia-seguros",
+        actionType: "closeWebview",
+      },
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(data));
+  };
+
   return (
     <>
       <div>
@@ -35,14 +46,7 @@ function App() {
           NERA APP
         </a>
         <br />
-        <button
-          onClick={() => {
-            const data = { message: "close-webview" };
-            window.ReactNativeWebView.postMessage(JSON.stringify(data));
-          }}
-        >
-          Cerrar WebView
-        </button>
+        <button onClick={sendDataNeraWenView}>Cerrar WebView</button>
         <br />
         <p>token: {token}</p>
       </div>
