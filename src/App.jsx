@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import useRedirectToApp from "./useRedirectToApp";
-
-import React, { useEffect, useRef } from "react";
+import "./App.css";
 
 function App() {
   const [token, setToken] = useState("");
+  const token2 = sessionStorage.getItem("appNeraAuthToken");
+
   useEffect(() => {
     const token1 = sessionStorage.getItem("appNeraAuthToken");
     setToken(token1);
@@ -14,7 +14,6 @@ function App() {
     alert("token::[]", token1);
   }, []);
 
-  const token2 = sessionStorage.getItem("appNeraAuthToken");
   useEffect(() => {
     setToken(token2);
     console.log("token::[]", token2);
