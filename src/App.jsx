@@ -12,15 +12,17 @@ function App() {
     setToken(token1);
     console.log("token::[]", token1);
     alert("token::[]", token1);
+    alert(token1);
   }, []);
 
   useEffect(() => {
     setToken(token2);
     console.log("token::[]", token2);
-    alert("token::[token2]", token2);
+    alert("token::[]", token2);
+    alert(token2);
   }, [token2]);
 
-  useRedirectToApp({ appScheme: "appnera", ask: true });
+  // useRedirectToApp({ appScheme: "appnera", ask: true });
 
   return (
     <>
