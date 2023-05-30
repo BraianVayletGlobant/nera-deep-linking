@@ -23,7 +23,7 @@ function App() {
       action: "webview-action",
       payload: {
         entity: "galicia-seguros",
-        actionType: "closeWebview",
+        actionType: "close-webview",
       },
     };
     console.log("data:web", data);
