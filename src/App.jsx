@@ -26,6 +26,7 @@ function App() {
         actionType: "closeWebview",
       },
     };
+    console.log("data:web", data);
     window.ReactNativeWebView.postMessage(JSON.stringify(data));
   };
 
@@ -46,7 +47,7 @@ function App() {
           NERA APP
         </a>
         <br />
-        <button onClick={sendDataNeraWenView}>Cerrar WebView</button>
+        <button onClick={() => sendDataNeraWenView()}>Cerrar WebView</button>
         <br />
         <p>token: {token}</p>
       </div>
