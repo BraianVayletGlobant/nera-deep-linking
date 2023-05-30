@@ -3,6 +3,64 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import useRedirectToApp from "./useRedirectToApp";
 
+import React, { useEffect, useRef } from "react";
+import html2pdf from "html2pdf.js";
+
+const HtmlToPdfComponent = ({ htmlContent }) => {
+  const pdfRef = useRef(null);
+
+  const convertToPdf = async () => {
+    await html2pdf()
+      .from(htmlContent)
+      .save()
+      .then(() => {
+        if (navigator.share) {
+          navigator.share({
+            title: "Compartir PDF",
+            files: [
+              new File(["pdf"], "archivo.pdf", { type: "application/pdf" }),
+            ],
+          });
+        } else {
+          console.log(
+            "La API de Web Share no está disponible en este dispositivo."
+          );
+        }
+      });
+  };
+
+  useEffect(() => {
+    const token1 = sessionStorage.getItem("appNeraAuthToken");
+    console.log("token::[]", token1);
+  }, []);
+
+  const token2 = sessionStorage.getItem("appNeraAuthToken");
+  useEffect(() => {
+    console.log("token::[]", token2);
+  }, [token2]);
+
+  return (
+    <div>
+      <div ref={pdfRef}>
+        {/* Contenido HTML que se convertirá a PDF */}
+        {htmlContent}
+      </div>
+      <button onClick={convertToPdf}>Convertir a PDF</button>
+    </div>
+  );
+};
+
+const HTML_TEST = (
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src={viteLogo} className="logo" alt="Vite logo" />
+    </a>
+    <a href="https://react.dev" target="_blank">
+      <img src={reactLogo} className="logo react" alt="React logo" />
+    </a>
+  </div>
+);
+
 function App() {
   useRedirectToApp({ appScheme: "appnera", ask: true });
 
@@ -45,6 +103,7 @@ function App() {
         </a>
         <button onClick={onClickShare}>SHARE</button>
         <br />
+        <HtmlToPdfComponent htmlContent={HTML_TEST} />
       </div>
     </>
   );
