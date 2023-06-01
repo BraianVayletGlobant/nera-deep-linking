@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
-import useRedirectToApp from "./useRedirectToApp";
+// import useRedirectToApp from "./useRedirectToApp";
 import "./App.css";
 
 function App() {
@@ -11,14 +11,14 @@ function App() {
     setToken(token2);
   }, [token2]);
 
-  useEffect(() => {
-    const data = { message: "Hola desde la página web", entity: "web" };
-    window.ReactNativeWebView.postMessage(JSON.stringify(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = { message: "Hola desde la página web", entity: "web" };
+  //   window.ReactNativeWebView.postMessage(JSON.stringify(data));
+  // }, []);
 
   // useRedirectToApp({ appScheme: "appnera", ask: true });
 
-  const sendDataNeraWenView = () => {
+  const sendDataNeraWebView = () => {
     const data = {
       action: "webview-action",
       payload: {
@@ -47,7 +47,7 @@ function App() {
           NERA APP
         </a>
         <br />
-        <button onClick={() => sendDataNeraWenView()}>Cerrar WebView</button>
+        <button onClick={sendDataNeraWebView}>Cerrar WebView</button>
         <br />
         {/* <p>token: {token}</p> */}
       </div>
