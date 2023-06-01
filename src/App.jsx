@@ -39,6 +39,7 @@ function App() {
       },
     };
     window.ReactNativeWebView.postMessage(JSON.stringify(data));
+    window.location.href = "mailto:";
   };
 
   return (
@@ -60,7 +61,7 @@ function App() {
         <br />
         <button onClick={sendDataNeraWebView}>Cerrar WebView</button>        
         <br />
-        <button onClick={sendDataNeraWebView2}>Test Email</button>
+        {window.ReactNativeWebView && <button onClick={sendDataNeraWebView2}>Test Email</button>}
   
         {/* <p>token: {token}</p> */}
       </div>
