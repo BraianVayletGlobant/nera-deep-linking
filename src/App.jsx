@@ -38,7 +38,7 @@ function App() {
                 data: 'open-email-app',
       },
     };
-    window.ReactNativeWebView.postMessage(JSON.stringify(data));
+    window?.ReactNativeWebView?.postMessage(JSON.stringify(data));
     window.location.href = "mailto:";
   };
 
@@ -61,7 +61,7 @@ function App() {
         <br />
         <button onClick={sendDataNeraWebView}>Cerrar WebView</button>        
         <br />
-        {window.ReactNativeWebView && <button onClick={sendDataNeraWebView2}>Test Email</button>}
+        <button onClick={sendDataNeraWebView2}>Test Email</button>
   
         {/* <p>token: {token}</p> */}
       </div>
