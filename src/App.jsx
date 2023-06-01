@@ -26,7 +26,18 @@ function App() {
         actionType: "close-webview",
       },
     };
-    console.log("data:web", data);
+    window.ReactNativeWebView.postMessage(JSON.stringify(data));
+  };
+
+  const sendDataNeraWebView2 = () => {
+    const data = {
+      action: "webview-action",
+      payload: {
+        entity: "nera-productor",
+        actionType: 'close-webview',
+                data: 'open-email-app',
+      },
+    };
     window.ReactNativeWebView.postMessage(JSON.stringify(data));
   };
 
@@ -47,8 +58,10 @@ function App() {
           NERA APP
         </a>
         <br />
-        <button onClick={sendDataNeraWebView}>Cerrar WebView</button>
+        <button onClick={sendDataNeraWebView}>Cerrar WebView</button>        
         <br />
+        <button onClick={sendDataNeraWebView2}>Test Email</button>
+  
         {/* <p>token: {token}</p> */}
       </div>
     </>
